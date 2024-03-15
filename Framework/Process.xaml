@@ -3,6 +3,8 @@
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
     <x:Property Name="in_TransactionNumber" Type="InArgument(x:Int32)" />
+    <x:Property Name="out_PrecioProducto" Type="OutArgument(x:String)" />
+    <x:Property Name="out_LeyendaProducto" Type="OutArgument(x:String)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -110,7 +112,7 @@
       <AssemblyReference>System.Linq.Async</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="416,702" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="416,549" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="str_PrecioProducto" />
       <Variable x:TypeArguments="x:String" Name="str_LeyendaProducto" />
@@ -123,36 +125,23 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="354,181" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Iniciando Procesamiento de Datos&quot;]" />
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Se procesa la extracción de datos de cada uno de los productos." DisplayName="Amazon\Amazon_ExtractProductInfo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="354,195" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Amazon\Amazon_ExtractProductInfo.xaml">
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Se procesa la extracción de datos de cada uno de los productos." DisplayName="Amazon\Amazon_ExtractProductInfo.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="354,178" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="Amazon\Amazon_ExtractProductInfo.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="x:String" x:Key="in_ProductURL">[in_TransactionItem.SpecificContent("URL").ToString]</InArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_PrecioProducto">[str_PrecioProducto]</OutArgument>
-        <OutArgument x:TypeArguments="x:String" x:Key="out_LeyendaProducto">[str_LeyendaProducto]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_ProductURL">
+          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_TransactionItem.SpecificContent(&quot;URL&quot;).ToString" />
+        </InArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_PrecioProducto">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="out_PrecioProducto" />
+        </OutArgument>
+        <OutArgument x:TypeArguments="x:String" x:Key="out_LeyendaProducto">
+          <VisualBasicReference x:TypeArguments="x:String" ExpressionText="out_LeyendaProducto" />
+        </OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-    </ui:InvokeWorkflowFile>
-    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Amazon\Amazon_ProcessData.xaml - Invoke Workflow File" sap:VirtualizedContainerService.HintSize="354,136" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="Amazon\Amazon_ProcessData.xaml">
-      <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">
-          <VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="in_Config" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:Int32" x:Key="in_TransactionNumber">
-          <VisualBasicValue x:TypeArguments="x:Int32" ExpressionText="in_TransactionNumber" />
-        </InArgument>
-        <InArgument x:TypeArguments="ui:QueueItem" x:Key="in_TransactionItem">
-          <VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="in_TransactionItem" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_PrecioProducto">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_PrecioProducto" />
-        </InArgument>
-        <InArgument x:TypeArguments="x:String" x:Key="in_LeyendaProducto">
-          <VisualBasicValue x:TypeArguments="x:String" ExpressionText="str_LeyendaProducto" />
-        </InArgument>
-      </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
 </Activity>
