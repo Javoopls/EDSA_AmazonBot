@@ -7,7 +7,7 @@
   <VisualBasic.Settings>
     <x:Null />
   </VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1244,1293</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1244,1324</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>Amazon_ExtractProductInformation_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -122,20 +122,20 @@
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Proceso en el cual se extrae la información a almacenar de los productos.&#xA;&#xA;- Se accede directamente al link de cada producto.&#xA;- Se verifica si el producto está disponible o no.&#xA;- Si el producto se encuentra disponible, se almacena su precio y leyenda.&#xA;- Si el producto no está disponible, se sustituyen estos valores por un guión &quot;-&quot;." DisplayName="Amazon_ExtractProductInformation" sap:VirtualizedContainerService.HintSize="1112,1228" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Proceso en el cual se extrae la información a almacenar de los productos.&#xA;&#xA;- Se accede directamente al link de cada producto.&#xA;- Se verifica si el producto está disponible o no.&#xA;- Si el producto se encuentra disponible, se almacena su precio y leyenda.&#xA;- Si el producto no está disponible, se sustituyen estos valores por un guión &quot;-&quot;." DisplayName="Amazon_ExtractProductInformation" sap:VirtualizedContainerService.HintSize="1112,1259" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Edge: Amazon.com. Spend less. Smile more." sap:VirtualizedContainerService.HintSize="1050,1038" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="Always" ScopeGuid="f523be49-b22b-461b-ac7d-48bb9c1623e2" Version="V2" WindowResize="Maximize">
+    <uix:NApplicationCard AttachMode="ByInstance" DisplayName="Use Browser Edge: Amazon.com. Spend less. Smile more." sap:VirtualizedContainerService.HintSize="1050,1069" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="Always" ScopeGuid="f523be49-b22b-461b-ac7d-48bb9c1623e2" Version="V2" WindowResize="Maximize">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1016,798" sap2010:WorkflowViewState.IdRef="Sequence_6">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="1016,829" sap2010:WorkflowViewState.IdRef="Sequence_6">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="str_PrecioProducto" />
               <Variable x:TypeArguments="x:String" Name="str_LeyendaProducto" />
@@ -145,12 +145,13 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <uix:NCheckState DisplayName="Check App State 'Currently unavailable.'" sap:VirtualizedContainerService.HintSize="954,711" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="f523be49-b22b-461b-ac7d-48bb9c1623e2" Version="V3">
+            <uix:NCheckState DisplayName="Check App State 'Currently unavailable.'" sap:VirtualizedContainerService.HintSize="954,742" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="f523be49-b22b-461b-ac7d-48bb9c1623e2" Version="V3">
               <uix:NCheckState.IfExists>
-                <Sequence DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,203" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                <Sequence sap2010:Annotation.AnnotationText="Si el producto no está disponible, se arroja una Business Exception." DisplayName="Target appears" sap:VirtualizedContainerService.HintSize="450,236" sap2010:WorkflowViewState.IdRef="Sequence_10">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <Throw DisplayName="Throw BRE - Producto no Disponible" Exception="[New BusinessRuleException(&quot; Producto no se encuentra disponible.&quot;)]" sap:VirtualizedContainerService.HintSize="388,115" sap2010:WorkflowViewState.IdRef="Throw_1">
@@ -164,10 +165,11 @@
                 </Sequence>
               </uix:NCheckState.IfExists>
               <uix:NCheckState.IfNotExists>
-                <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,469" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                <Sequence sap2010:Annotation.AnnotationText="Si el producto está disponible, se procesará de forma normal." DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,500" sap2010:WorkflowViewState.IdRef="Sequence_11">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                   <uix:NGetText DisplayName="Get - Precio Producto" sap:VirtualizedContainerService.HintSize="388,197" sap2010:WorkflowViewState.IdRef="NGetText_5" ScopeIdentifier="f523be49-b22b-461b-ac7d-48bb9c1623e2" TextString="[out_PrecioProducto]" Version="V3">
